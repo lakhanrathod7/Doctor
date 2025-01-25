@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../data/users.dart';
@@ -42,9 +44,12 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) => Scaffold(
     backgroundColor: Colors.black,
     appBar: AppBar(
-      title: Text(
-        "Appointment Book",
-        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+      title: Padding(
+        padding: const EdgeInsets.only(left: 5),
+        child: Text(
+          "Appointment Book",
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
       ),
       actions: [
         IconButton(
@@ -136,10 +141,11 @@ class _HomePageState extends State<HomePage>
 
     if (dragDistance > minimumDrag || dragDistance < -minimumDrag) {
       _controller.reset();
-      _controller.forward();
+      _controller.forward(); // Trigger bounce animation
     }
 
     if (dragDistance > minimumDrag) {
+      // Swiped Right - Add to liked users
       user.isLiked = true;
       likedUsers.add(user);
       setState(() {
@@ -147,7 +153,7 @@ class _HomePageState extends State<HomePage>
         users.remove(user);
       });
     } else if (dragDistance < -minimumDrag) {
-
+      // Swiped Left - Discard the user
       user.isSwipedOff = true;
       setState(() {
         lastRemovedUser = user; // Store the last removed user
@@ -170,3 +176,34 @@ class _HomePageState extends State<HomePage>
     }
   }
 }
+
+
+
+
+   // Row(
+   //          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+   //          children: [
+   //            IconButton(
+   //              onPressed: () {
+   //                if (currentUserIndex > 0) {
+   //                  setState(() {
+   //                    currentUserIndex--; // Show the previous user
+   //                  });
+   //                }
+   //              },
+   //              icon: Icon(Icons.arrow_back_ios),
+   //              color: Colors.white,
+   //            ),
+   //            IconButton(
+   //              onPressed: () {
+   //                if (currentUserIndex < users.length - 1) {
+   //                  setState(() {
+   //                    currentUserIndex++; // Show the next user
+   //                  });
+   //                }
+   //              },
+   //              icon: Icon(Icons.arrow_forward_ios),
+   //              color: Colors.white,
+   //            ),
+   //          ],
+   //        )

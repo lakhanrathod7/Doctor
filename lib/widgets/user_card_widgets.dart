@@ -129,12 +129,16 @@ class UserCardWidget extends StatelessWidget {
             fontSize: 18,
           ),
         ),
-        SizedBox(height: 8),
+        // SizedBox(height: 8),
         Text(
           user.specialty,
           style: TextStyle(color: Colors.white),
         ),
-        SizedBox(height: 4),
+        // SizedBox(height: 4),
+        Text(
+          'Experience : ${user.experience.toString()}years',
+          style: TextStyle(color: Colors.white),
+        ),
       ],
     ),
   );
